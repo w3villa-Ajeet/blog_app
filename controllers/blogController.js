@@ -49,6 +49,7 @@ exports.createBlogController = async (req, res) => {
     }
 
     const newBlog = new blogModel({ title, description, image, user });
+    //with the help of session when blog is created then the blog will be updated in user blog array
     const session = await mongoose.startSession();
     session.startTransaction();
     await newBlog.save({ session });
@@ -71,7 +72,7 @@ exports.createBlogController = async (req, res) => {
   }
 };
 
-//Update Blog
+//Update Blog by id
 exports.updateBlogController = async (req, res) => {
   try {
     const { id } = req.params;
@@ -96,7 +97,7 @@ exports.updateBlogController = async (req, res) => {
   }
 };
 
-//SIngle Blog
+//get single blog by id
 exports.getBlogByIdController = async (req, res) => {
   try {
     const { id } = req.params;
@@ -104,7 +105,7 @@ exports.getBlogByIdController = async (req, res) => {
     if (!blog) {
       return res.status(404).send({
         success: false,
-        message: "blog not found with this is",
+        message: "blog not found with this id",
       });
     }
     return res.status(200).send({
@@ -122,7 +123,7 @@ exports.getBlogByIdController = async (req, res) => {
   }
 };
 
-//Delete Blog
+//Delete Blog by id
 exports.deleteBlogController = async (req, res) => {
   try {
     const blog = await blogModel
@@ -145,7 +146,7 @@ exports.deleteBlogController = async (req, res) => {
   }
 };
 
-//GET USER BLOG
+//GET USER BLOG (get user's all blog)
 exports.userBlogControlller = async (req, res) => {
   try {
     const userBlog = await userModel.findById(req.params.id).populate("blogs");
