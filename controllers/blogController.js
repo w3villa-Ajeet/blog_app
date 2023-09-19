@@ -166,7 +166,7 @@ exports.userBlogControlller = async (req, res) => {
     console.log(error);
     return res.status(400).send({
       success: false,
-      message: "error in user blog",
+      message: "there is an error in user blog",
       error,
     });
   }
