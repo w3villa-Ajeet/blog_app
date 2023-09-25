@@ -154,7 +154,7 @@ exports.userBlogControlller = async (req, res) => {
     if (!userBlog) {
       return res.status(404).send({
         success: false,
-        message: "blogs not found with this id",
+        message: "blogs does not found with this id",
       });
     }
     return res.status(200).send({
@@ -166,7 +166,7 @@ exports.userBlogControlller = async (req, res) => {
     console.log(error);
     return res.status(400).send({
       success: false,
-      message: "there is an error in user blog",
+      message: "there is an error in this user blog",
       error,
     });
   }
